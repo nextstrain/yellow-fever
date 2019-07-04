@@ -76,6 +76,7 @@
     }
   },
   "defaults": {
+    "colorBy": "source_file",
     "distanceMeasure": "div",
     "geoResolution": "strain",
     "mapTriplicate": false
@@ -112,10 +113,6 @@
       "JF912184": {
         "latitude": -1.68036,
         "longitude": -50.4791
-      },
-      "JF912185": {
-        "latitude": -20.9302,
-        "longitude": -54.9692
       },
       "JF912186": {
         "latitude": -15.9187,
@@ -256,10 +253,6 @@
       "MF370543": {
         "latitude": -16.4549,
         "longitude": -54.2487
-      },
-      "MF370544": {
-        "latitude": -2.43849,
-        "longitude": -54.6996
       },
       "MF370546": {
         "latitude": -4.24749,
@@ -493,10 +486,6 @@
         "latitude": -22.4812,
         "longitude": -42.2066
       },
-      "MH018115": {
-        "latitude": -20.327,
-        "longitude": -41.1355
-      },
       "MH484424": {
         "latitude": -17.8595,
         "longitude": -41.5087
@@ -528,10 +517,6 @@
       "MH484432": {
         "latitude": -19.836,
         "longitude": -42.3165
-      },
-      "MH484434": {
-        "latitude": -18.548,
-        "longitude": -42.7655
       }
     }
   },
@@ -546,5 +531,5 @@
   ],
   "title": "Yellow Fever Virus SA1",
   "updated": "04 Jul 2019",
-  "virus_count": 120
+  "virus_count": 115
 }

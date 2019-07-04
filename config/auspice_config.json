@@ -58,7 +58,8 @@
   "defaults": {
     "mapTriplicate": false,
     "distanceMeasure": "div",
-    "geoResolution": "strain"
+    "geoResolution": "strain",
+    "colorBy": "source_file"
   },  
   "maintainer": [
     "Sarah Hill",
