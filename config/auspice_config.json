@@ -1,0 +1,63 @@
+{
+  "title": "Yellow Fever Virus SA1",
+  "color_options": {
+    "gt": {
+      "menuItem": "genotype",
+      "legendTitle": "Genotype",
+      "type": "discrete",
+      "key": "genotype"
+    },
+    "country": {
+      "type": "discrete"
+    },
+    "collection_year": {
+      "menuItem": "Collection Year",
+      "legendTitle": "Collection Year",
+      "type": "continuous"
+    },
+    "sample_type": {
+      "menuItem": "Sample Type",
+      "legendTitle": "Sample Type",
+      "type": "discrete"
+    },
+    "municipality": {
+      "type": "discrete"
+    },
+    "municipality_code": {
+      "menuItem": "Municipality Code",
+      "legendTitle": "Municipality Code",
+      "type": "discrete"
+    },
+    "host": {
+      "type": "discrete"
+    },
+    "host_genus": {
+      "menuItem": "Host Genus",
+      "legendTitle": "Host Genus",
+      "type": "discrete"
+    },
+    "host_species": {
+      "menuItem": "Host Species",
+      "legendTitle": "Host Species",
+      "type": "discrete"
+    },
+    "source_file": {
+      "menuItem": "Source File",
+      "legendTitle": "Source File",
+      "type": "discrete"
+    }
+  },
+  "geo": [
+    "strain"
+  ],
+  "defaults": {
+    "mapTriplicate": false
+  },  
+  "maintainer": [
+    "Sarah Hill",
+    "http://evolve.zoo.ox.ac.uk/Evolve/Sarah_Hill.html"
+  ],
+  "filters": [
+    "country"
+  ]
+}
