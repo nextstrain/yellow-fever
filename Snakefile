@@ -70,8 +70,8 @@ rule tree:
 rule refine:
     message:
         """
-        Refining tree to add names to internal nodes
-        NOTE: we are not inferring a time tree here
+        Refining tree to add names to internal nodes and inferring a timetree.
+        NOTE: this step can drop samples which are extreme outliers in the root-to-tip analysis
         """
     input:
         tree = rules.tree.output.tree,
@@ -81,7 +81,10 @@ rule refine:
         tree = "results/tree.nwk",
         node_data = "results/branch_lengths.json"
     params:
-        root="JF912179"
+        root="best",
+        coalescent = "opt",
+        clock_filter_iqd = 4,
+        date_inference = "marginal"
     shell:
         """
         augur refine \
@@ -90,6 +93,11 @@ rule refine:
             --metadata {input.metadata} \
             --output-tree {output.tree} \
             --output-node-data {output.node_data} \
+            --timetree \
+            --coalescent {params.coalescent} \
+            --date-confidence \
+            --date-inference {params.date_inference} \
+            --clock-filter-iqd {params.clock_filter_iqd} \
             --root {params.root}
         """
 

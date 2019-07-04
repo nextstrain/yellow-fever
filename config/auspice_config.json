@@ -10,6 +10,11 @@
     "country": {
       "type": "discrete"
     },
+    "num_date": {
+      "menuItem": "date",
+      "legendTitle": "Sampling date",
+      "type": "continuous"
+    },
     "collection_year": {
       "menuItem": "Collection Year",
       "legendTitle": "Collection Year",
@@ -51,7 +56,9 @@
     "strain"
   ],
   "defaults": {
-    "mapTriplicate": false
+    "mapTriplicate": false,
+    "distanceMeasure": "div",
+    "geoResolution": "strain"
   },  
   "maintainer": [
     "Sarah Hill",

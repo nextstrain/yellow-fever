@@ -33,7 +33,7 @@ def convert_date_fields_to_numeric(date_fields):
       raise Exception("Unknown date format -- ", date_fields)
 
 def parse_metadata(metadataIn):
-    tsv_header = ["strain", "sample_date", "num_date", "collection_year", "sample_type", "country", "municipality", "municipality_code", "host", "host_genus", "host_species", "source_file", "authors"]
+    tsv_header = ["strain", "date", "num_date", "collection_year", "sample_type", "country", "municipality", "municipality_code", "host", "host_genus", "host_species", "source_file", "authors"]
     tsv_data = []
     strains = set()
     lat_long_data = {}

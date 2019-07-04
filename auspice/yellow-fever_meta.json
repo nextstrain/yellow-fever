@@ -56,6 +56,12 @@
       "menuItem": "Municipality Code",
       "type": "discrete"
     },
+    "num_date": {
+      "key": "num_date",
+      "legendTitle": "Sampling date",
+      "menuItem": "date",
+      "type": "continuous"
+    },
     "sample_type": {
       "key": "sample_type",
       "legendTitle": "Sample Type",
@@ -70,6 +76,8 @@
     }
   },
   "defaults": {
+    "distanceMeasure": "div",
+    "geoResolution": "strain",
     "mapTriplicate": false
   },
   "filters": [
@@ -237,10 +245,6 @@
         "latitude": -16.807,
         "longitude": -42.3431
       },
-      "MF370539": {
-        "latitude": -1.94623,
-        "longitude": -54.7384
-      },
       "MF370540": {
         "latitude": 0.939956,
         "longitude": -60.4389
@@ -249,10 +253,6 @@
         "latitude": -1.75989,
         "longitude": -55.8579
       },
-      "MF370542": {
-        "latitude": -1.99768,
-        "longitude": -54.0724
-      },
       "MF370543": {
         "latitude": -16.4549,
         "longitude": -54.2487
@@ -260,10 +260,6 @@
       "MF370544": {
         "latitude": -2.43849,
         "longitude": -54.6996
-      },
-      "MF370545": {
-        "latitude": -3.7657,
-        "longitude": -49.6773
       },
       "MF370546": {
         "latitude": -4.24749,
@@ -445,14 +441,6 @@
         "latitude": -18.2195,
         "longitude": -42.4946
       },
-      "MH018097": {
-        "latitude": -20.4468,
-        "longitude": -42.0976
-      },
-      "MH018098": {
-        "latitude": -15.3014,
-        "longitude": -45.6116
-      },
       "MH018099": {
         "latitude": -15.0356,
         "longitude": -41.9308
@@ -505,10 +493,6 @@
         "latitude": -22.4812,
         "longitude": -42.2066
       },
-      "MH018114": {
-        "latitude": -19.875,
-        "longitude": -40.8753
-      },
       "MH018115": {
         "latitude": -20.327,
         "longitude": -41.1355
@@ -520,10 +504,6 @@
       "MH484425": {
         "latitude": -17.8595,
         "longitude": -41.5087
-      },
-      "MH484426": {
-        "latitude": -17.8552,
-        "longitude": -42.8561
       },
       "MH484427": {
         "latitude": -18.0755,
@@ -549,10 +529,6 @@
         "latitude": -19.836,
         "longitude": -42.3165
       },
-      "MH484433": {
-        "latitude": -20.249,
-        "longitude": -46.3639
-      },
       "MH484434": {
         "latitude": -18.548,
         "longitude": -42.7655
@@ -569,6 +545,6 @@
     "entropy"
   ],
   "title": "Yellow Fever Virus SA1",
-  "updated": "03 Jul 2019",
-  "virus_count": 129
+  "updated": "04 Jul 2019",
+  "virus_count": 120
 }
