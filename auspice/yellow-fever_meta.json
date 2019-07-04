@@ -73,7 +73,15 @@
     "mapTriplicate": false
   },
   "filters": [
-    "country"
+    "country",
+    "collection_year",
+    "sample_type",
+    "municipality",
+    "municipality_code",
+    "host",
+    "host_genus",
+    "host_species",
+    "source_file"
   ],
   "geo": {
     "strain": {
