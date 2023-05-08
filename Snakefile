@@ -13,7 +13,7 @@ rule files:
 files = rules.files.params
 
 rule parse:
-    message: "Parsing provided metadata & sequences into augur formats"
+    """Parsing provided metadata & sequences into augur formats"""
     input:
         metadata = files.input_metadata,
         sequences = files.input_sequences
@@ -34,11 +34,10 @@ rule parse:
         """
 
 rule align:
-    message:
-        """
-        Aligning sequences to {input.reference}
-          - filling gaps with N
-        """
+    """
+    Aligning sequences to {input.reference}
+      - filling gaps with N
+    """
     input:
         sequences = "results/sequences.fasta",
         reference = files.reference
@@ -55,7 +54,7 @@ rule align:
         """
 
 rule tree:
-    message: "Building tree using IQ-TREE"
+    """Building tree using IQ-TREE"""
     input:
         alignment = "results/aligned.fasta"
     output:
@@ -68,11 +67,10 @@ rule tree:
         """
 
 rule refine:
-    message:
-        """
-        Refining tree to add names to internal nodes and inferring a timetree.
-        NOTE: this step can drop samples which are extreme outliers in the root-to-tip analysis
-        """
+    """
+    Refining tree to add names to internal nodes and inferring a timetree.
+    NOTE: this step can drop samples which are extreme outliers in the root-to-tip analysis
+    """
     input:
         tree = "results/tree_raw.nwk",
         alignment = "results/aligned.fasta",
@@ -102,7 +100,7 @@ rule refine:
         """
 
 rule ancestral:
-    message: "Reconstructing ancestral sequences and mutations"
+    """Reconstructing ancestral sequences and mutations"""
     input:
         tree = "results/tree.nwk",
         alignment = "results/aligned.fasta",
@@ -120,7 +118,7 @@ rule ancestral:
         """
 
 rule traits:
-    message: "Inferring ancestral traits for {params.columns!s}"
+    """Inferring ancestral traits for {params.columns!s}"""
     input:
         tree = "results/tree.nwk",
         metadata = "results/metadata.tsv",
@@ -140,7 +138,7 @@ rule traits:
 
 
 rule export:
-    message: "Exporting data files for for auspice"
+    """Exporting data files for for auspice"""
     input:
         tree = "results/tree.nwk",
         metadata = "results/metadata.tsv",
@@ -166,7 +164,7 @@ rule export:
         """
 
 rule clean:
-    message: "Removing directories: {params}"
+    """Removing directories: {params}"""
     params:
         "results ",
         "auspice"
