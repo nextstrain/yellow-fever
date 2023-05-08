@@ -40,7 +40,7 @@ rule align:
           - filling gaps with N
         """
     input:
-        sequences = rules.parse.output.sequences,
+        sequences = "results/sequences.fasta",
         reference = files.reference
     output:
         alignment = "results/aligned.fasta"
@@ -57,7 +57,7 @@ rule align:
 rule tree:
     message: "Building tree using IQ-TREE"
     input:
-        alignment = rules.align.output.alignment
+        alignment = "results/aligned.fasta"
     output:
         tree = "results/tree_raw.nwk"
     shell:
@@ -74,9 +74,9 @@ rule refine:
         NOTE: this step can drop samples which are extreme outliers in the root-to-tip analysis
         """
     input:
-        tree = rules.tree.output.tree,
-        alignment = rules.align.output,
-        metadata = rules.parse.output.metadata
+        tree = "results/tree_raw.nwk",
+        alignment = "results/aligned.fasta",
+        metadata = "results/metadata.tsv"
     output:
         tree = "results/tree.nwk",
         node_data = "results/branch_lengths.json"
@@ -104,8 +104,8 @@ rule refine:
 rule ancestral:
     message: "Reconstructing ancestral sequences and mutations"
     input:
-        tree = rules.refine.output.tree,
-        alignment = rules.align.output
+        tree = "results/tree.nwk",
+        alignment = "results/aligned.fasta",
     output:
         node_data = "results/nt_muts.json"
     params:
@@ -122,8 +122,8 @@ rule ancestral:
 rule traits:
     message: "Inferring ancestral traits for {params.columns!s}"
     input:
-        tree = rules.refine.output.tree,
-        metadata = rules.parse.output.metadata
+        tree = "results/tree.nwk",
+        metadata = "results/metadata.tsv",
     output:
         node_data = "results/traits.json",
     params:
@@ -142,13 +142,13 @@ rule traits:
 rule export:
     message: "Exporting data files for for auspice"
     input:
-        tree = rules.refine.output.tree,
-        metadata = rules.parse.output.metadata,
-        branch_lengths = rules.refine.output.node_data,
-        traits = rules.traits.output.node_data,
-        nt_muts = rules.ancestral.output.node_data,
+        tree = "results/tree.nwk",
+        metadata = "results/metadata.tsv",
+        branch_lengths = "results/branch_lengths.json",
+        traits = "results/traits.json",
+        nt_muts = "results/nt_muts.json",
         auspice_config = files.auspice_config,
-        lat_longs = rules.parse.output.latlongs,
+        lat_longs = "results/latlongs.tsv",
         annotation_file = "config/genome_annotation_file.json"
     output:
         auspice_tree = rules.all.input.auspice_tree,
