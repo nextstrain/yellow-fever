@@ -1,6 +1,7 @@
 # Nextstrain repository for yellow fever virus
 
-##TODO## finish updating this
+<!-- ##TODO## finish updating this -->
+
 This repository is in the process of being upgraded to follow the
 [pathogen repo
 guide](https://github.com/nextstrain/pathogen-repo-guide/).
