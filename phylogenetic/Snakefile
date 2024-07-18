@@ -1,5 +1,6 @@
 configfile: "defaults/config.yaml"
 
+# we will likely add gene-specific builds in the future
 gene = ["genome"]
 
 rule all:
