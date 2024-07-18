@@ -1,5 +1,4 @@
 # pipeline output #
-##############
 ingest/benchmarks
 ingest/data
 ingest/logs
@@ -11,13 +10,11 @@ phylogenetic/results
 
 
 # Snakemake state dir #
-##############
 .snakemake
 snakemake_log
 
 
 # For Python #
-##############
 *.pyc
 .tox/
 .cache/
@@ -25,9 +22,7 @@ __pycache__/*
 
 
 # OS generated files #
-######################
 .DS_Store
-.DS_Store?
 ._*
 .Spotlight-V100
 .Trashes

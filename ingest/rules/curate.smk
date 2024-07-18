@@ -18,6 +18,8 @@ rule fetch_general_geolocation_rules:
         general_geolocation_rules="data/general-geolocation-rules.tsv",
     params:
         geolocation_rules_url=config["curate"]["geolocation_rules_url"],
+    log:
+        "logs/fetch_general_geolocation_rules.txt",
     benchmark:
         "benchmarks/fetch_general_geolocation_rules.txt"
     shell:
@@ -32,6 +34,8 @@ rule concat_geolocation_rules:
         local_geolocation_rules=config["curate"]["local_geolocation_rules"],
     output:
         all_geolocation_rules="data/all-geolocation-rules.tsv",
+    log:
+        "logs/concat_geolocation_rules.txt",
     benchmark:
         "benchmarks/concat_geolocation_rules.txt"
     shell:
@@ -116,6 +120,8 @@ rule subset_metadata:
         subset_metadata="data/subset_metadata.tsv",
     params:
         metadata_fields=",".join(config["curate"]["metadata_columns"]),
+    log:
+        "logs/subset_metadata.txt",
     benchmark:
         "benchmarks/subset_metadata.txt"
     shell:

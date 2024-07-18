@@ -18,6 +18,8 @@ rule fetch_ncbi_dataset_package:
         dataset_package=temp("data/ncbi_dataset.zip"),
     # Allow retries in case of network errors
     retries: 5
+    log:
+        "logs/fetch_ncbi_dataset_package.txt",
     benchmark:
         "benchmarks/fetch_ncbi_dataset_package.txt"
     shell:
@@ -28,29 +30,13 @@ rule fetch_ncbi_dataset_package:
         """
 
 
-# Note: This rule is not part of the default workflow! It is intended
-# to be used as a specific target to be able to inspect and explore
-# the full raw metadata from NCBI Datasets.
-rule dump_ncbi_dataset_report:
-    input:
-        dataset_package="data/ncbi_dataset.zip",
-    output:
-        ncbi_dataset_tsv="data/ncbi_dataset_report_raw.tsv",
-    benchmark:
-        "benchmarks/dump_ncbi_dataset_report.txt"
-    shell:
-        """
-        dataformat tsv virus-genome \
-            --package {input.dataset_package} \
-        > {output.ncbi_dataset_tsv}
-        """
-
-
 rule extract_ncbi_dataset_sequences:
     input:
         dataset_package="data/ncbi_dataset.zip",
     output:
         ncbi_dataset_sequences=temp("data/ncbi_dataset_sequences.fasta"),
+    log:
+        "logs/extract_ncbi_dataset_sequences.txt",
     benchmark:
         "benchmarks/extract_ncbi_dataset_sequences.txt"
     shell:
@@ -68,6 +54,8 @@ rule format_ncbi_dataset_report:
         ncbi_dataset_tsv=temp("data/ncbi_dataset_report.tsv"),
     params:
         ncbi_datasets_fields=",".join(config["ncbi_datasets_fields"]),
+    log:
+        "logs/format_ncbi_dataset_report.txt",
     benchmark:
         "benchmarks/format_ncbi_dataset_report.txt"
     shell:
