@@ -1,20 +1,61 @@
 """
 This part of the workflow constructs the phylogenetic tree.
-
-REQUIRED INPUTS:
-
-    metadata            = data/metadata.tsv
-    prepared_sequences  = results/prepared_sequences.fasta
-
-OUTPUTS:
-
-    tree            = results/tree.nwk
-    branch_lengths  = results/branch_lengths.json
-
-This part of the workflow usually includes the following steps:
-
-    - augur tree
-    - augur refine
-
-See Augur's usage docs for these commands for more details.
 """
+
+rule tree:
+    """Building tree"""
+    input:
+        alignment = "results/{gene}/aligned.fasta"
+    output:
+        tree = "results/{gene}/tree_raw.nwk"
+    log:
+        "logs/{gene}/tree.txt",
+    benchmark:
+        "benchmarks/{gene}/tree.txt"
+    shell:
+        """
+        augur tree \
+            --alignment {input.alignment:q} \
+            --output {output.tree:q}
+          2> {log:q}
+        """
+
+rule refine:
+    """
+    Refining tree
+      - use {params.coalescent} coalescent timescale
+      - estimate {params.date_inference} node dates
+      - filter tips more than {params.clock_filter_iqd} IQDs from clock expectation
+    """
+    input:
+        tree = "results/{gene}/tree_raw.nwk",
+        alignment = "results/{gene}/aligned.fasta",
+        metadata = "../ingest/results/metadata.tsv"
+    output:
+        tree = "results/{gene}/tree.nwk",
+        node_data = "results/{gene}/branch_lengths.json"
+    params:
+        coalescent = config["refine"]["coalescent"],
+        date_inference = config["refine"]["date_inference"],
+        clock_filter_iqd = config["refine"]["clock_filter_iqd"],
+        strain_id = config["strain_id_field"]
+    log:
+        "logs/{gene}/refine.txt",
+    benchmark:
+        "benchmarks/{gene}/refine.txt"
+    shell:
+        """
+        augur refine \
+            --tree {input.tree:q} \
+            --alignment {input.alignment:q} \
+            --metadata {input.metadata:q} \
+            --metadata-id-columns {params.strain_id:q} \
+            --output-tree {output.tree:q} \
+            --output-node-data {output.node_data:q} \
+            --coalescent {params.coalescent:q} \
+            --date-confidence \
+            --date-inference {params.date_inference:q} \
+            --clock-filter-iqd {params.clock_filter_iqd:q} \
+            --stochastic-resolve \
+          2> {log:q}
+        """
