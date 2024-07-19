@@ -26,7 +26,8 @@ rule fetch_ncbi_dataset_package:
         """
         datasets download virus genome taxon {params.ncbi_taxon_id:q} \
             --no-progressbar \
-            --filename {output.dataset_package}
+            --filename {output.dataset_package:q}
+          2> {log:q}
         """
 
 
@@ -41,9 +42,9 @@ rule extract_ncbi_dataset_sequences:
         "benchmarks/extract_ncbi_dataset_sequences.txt"
     shell:
         """
-        unzip -jp {input.dataset_package} \
+        unzip -jp {input.dataset_package:q} \
             ncbi_dataset/data/genomic.fna \
-        > {output.ncbi_dataset_sequences}
+          > {output.ncbi_dataset_sequences:q} 2> {log:q}
         """
 
 
@@ -61,7 +62,7 @@ rule format_ncbi_dataset_report:
     shell:
         """
         dataformat tsv virus-genome \
-            --package {input.dataset_package} \
+            --package {input.dataset_package:q} \
             --fields {params.ncbi_datasets_fields:q} \
             --elide-header \
             | csvtk fix-quotes -Ht \
@@ -70,7 +71,7 @@ rule format_ncbi_dataset_report:
             | csvtk -t mutate -f accession_version -n accession -p "^(.+?)\." \
             | csvtk del-quotes -t \
             | tsv-select -H -f accession --rest last \
-            > {output.ncbi_dataset_tsv}
+          > {output.ncbi_dataset_tsv:q} 2> {log:q}
         """
 
 
@@ -87,11 +88,11 @@ rule format_ncbi_datasets_ndjson:
     shell:
         """
         augur curate passthru \
-            --metadata {input.ncbi_dataset_tsv} \
-            --fasta {input.ncbi_dataset_sequences} \
+            --metadata {input.ncbi_dataset_tsv:q} \
+            --fasta {input.ncbi_dataset_sequences:q} \
             --seq-id-column accession_version \
             --seq-field sequence \
             --unmatched-reporting warn \
             --duplicate-reporting warn \
-            2> {log} > {output.ndjson}
+          > {output.ndjson:q} 2> {log:q}
         """
