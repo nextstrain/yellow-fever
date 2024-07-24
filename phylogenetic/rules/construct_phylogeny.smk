@@ -48,11 +48,13 @@ rule refine:
         augur refine \
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
+            --root mid_point \
             --metadata {input.metadata:q} \
             --metadata-id-columns {params.strain_id:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
             --coalescent {params.coalescent:q} \
+            --timetree \
             --date-confidence \
             --date-inference {params.date_inference:q} \
             --clock-filter-iqd {params.clock_filter_iqd:q} \

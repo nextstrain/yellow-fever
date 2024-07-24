@@ -31,6 +31,11 @@
       "key": "country",
       "title": "Country",
       "type": "categorical"
+    },
+    {
+      "key": "host",
+      "title": "Host",
+      "type": "categorical"
     }
   ],
   "geo_resolutions": [
@@ -39,13 +44,14 @@
   ],
   "display_defaults": {
     "map_triplicate": true,
-    "color_by": "clade"
+    "color_by": "region"
   },
   "filters": [
     "clade",
     "region",
     "country",
-    "author"
+    "author",
+    "host"
   ],
   "metadata_columns": [
     "author"

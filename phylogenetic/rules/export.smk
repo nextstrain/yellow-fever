@@ -19,7 +19,6 @@ rule export:
         auspice_json = "auspice/yellow-fever-virus_{gene}.json"
     params:
         strain_id = config["strain_id_field"],
-        metadata_columns = config["export"]["metadata_columns"]
     log:
         "logs/{gene}/export.txt",
     benchmark:
@@ -32,7 +31,6 @@ rule export:
             --metadata-id-columns {params.strain_id:q} \
             --node-data {input.branch_lengths:q} {input.traits:q} {input.nt_muts:q} {input.aa_muts:q} \
             --colors {input.colors:q} \
-            --metadata-columns {params.metadata_columns:q} \
             --auspice-config {input.auspice_config:q} \
             --include-root-sequence-inline \
             --output {output.auspice_json:q} \

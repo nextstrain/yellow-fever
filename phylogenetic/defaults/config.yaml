@@ -19,5 +19,5 @@ refine:
     clock_filter_iqd: 4
 ancestral:
     inference: "joint"
-export:
-    metadata_columns: "strain division location"
+traits:
+    columns: "region"

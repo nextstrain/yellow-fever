@@ -57,7 +57,8 @@ rule traits:
     output:
         node_data = "results/{gene}/traits.json",
     params:
-        columns = "region"
+        columns = config["traits"]["columns"],
+        strain_id = config["strain_id_field"],
     log:
         "logs/{gene}/traits.txt",
     benchmark:
@@ -66,9 +67,10 @@ rule traits:
         """
         augur traits \
             --tree {input.tree:q} \
+            --metadata-id-columns {params.strain_id:q} \
             --metadata {input.metadata:q} \
             --output {output.node_data:q} \
-            --columns {params.columns:q} \
+            --columns {params.columns} \
             --confidence \
           2> {log:q}
         """

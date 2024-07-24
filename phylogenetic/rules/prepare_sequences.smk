@@ -49,24 +49,21 @@ rule filter:
 rule align:
     input:
         sequences="results/genome/filtered.fasta",
-        reference=config["files"]["reference_fasta"],
+        reference=config["files"]["reference_gb"],
         genemap=config["files"]["genemap"],
     output:
         alignment="results/{gene}/aligned.fasta",
-        insertions="results/{gene}/insertions.tsv",
     log:
         "logs/{gene}/align.txt",
     benchmark:
         "benchmarks/{gene}/align.txt"
     shell:
         """
-        (
-          nextclade run \
-              --input-ref {input.reference:q} \
-              --input-annotation {input.genemap:q} \
-              --output-fasta - \
-              --output-tsv {output.insertions:q} \
-              {input.sequences:q} \
-          | seqkit seq -i > {output.alignment:q} \
-        ) 2> {log:q}
+        augur align \
+            --sequences {input.sequences} \
+            --reference-sequence {input.reference} \
+            --output {output.alignment} \
+            --fill-gaps \
+            --remove-reference \
+          2> {log:q}
         """
