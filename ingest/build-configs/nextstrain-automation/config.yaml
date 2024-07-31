@@ -1,5 +1,6 @@
-# This configuration file should contain all required configuration parameters
-# for the ingest workflow to run with additional Nextstrain automation rules.
+# This configuration file should contain all required configuration
+# parameters for the ingest workflow to run with additional Nextstrain
+# automation rules.
 
 # Custom rules to run as part of the Nextstrain automated workflow The
 # paths should be relative to the ingest directory.
@@ -15,7 +16,6 @@ cloudfront_domain: "data.nextstrain.org"
 s3_dst: "s3://nextstrain-data/files/workflows/seasonal-cov"
 
 # Mapping of files to upload
-## TODO verify
 files_to_upload:
   ncbi.ndjson.zst: data/ncbi.ndjson
   metadata.tsv.zst: results/metadata.tsv

@@ -1,0 +1,13 @@
+##sequence-region NC_002031.1 1 10862
+NC_002031.1	feature	source	1	10862	.	+	.	gene=nuc
+NC_002031.1	feature	gene	119	421	.	+	.	gene_name=C
+NC_002031.1	feature	gene	749	973	.	+	.	gene_name=M
+NC_002031.1	feature	gene	974	2452	.	+	.	gene_name=E
+NC_002031.1	feature	gene	2453	3508	.	+	.	gene_name=NS1
+NC_002031.1	feature	gene	3509	4180	.	+	.	gene_name=NS2a
+NC_002031.1	feature	gene	4181	4570	.	+	.	gene_name=NS2b
+NC_002031.1	feature	gene	4571	6439	.	+	.	gene_name=NS3
+NC_002031.1	feature	gene	6440	6817	.	+	.	gene_name=NS4a
+NC_002031.1	feature	gene	6818	6886	.	+	.	gene_name=2K
+NC_002031.1	feature	gene	6887	7636	.	+	.	gene_name=NS4b
+NC_002031.1	feature	gene	7637	10351	.	+	.	gene_name=RdRPol

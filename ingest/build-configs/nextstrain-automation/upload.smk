@@ -1,14 +1,15 @@
 """
 This part of the workflow handles uploading files to AWS S3.
 
-Files to upload must be defined in the `files_to_upload` config param, where
-the keys are the remote files and the values are the local filepaths
-relative to the ingest directory.
+Files to upload must be defined in the `files_to_upload` config param,
+where the keys are the remote files and the values are the local
+filepaths relative to the ingest directory.
 
 Produces a single file for each uploaded file:
     "results/upload/{remote_file}.upload"
 
 The rule `upload_all` can be used as a target to upload all files.
+
 """
 
 import os

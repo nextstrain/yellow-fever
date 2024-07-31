@@ -1,18 +1,25 @@
 # pipeline output #
-benchmarks/
-data/
-logs/
-results/
+ingest/benchmarks
+ingest/data
+ingest/logs
+ingest/results
+phylogenetic/auspice
+phylogenetic/benchmarks
+phylogenetic/logs
+phylogenetic/results
 
-# snakemake output #
+
+# Snakemake state dir #
 .snakemake
 snakemake_log
+
 
 # For Python #
 *.pyc
 .tox/
 .cache/
 __pycache__/*
+
 
 # OS generated files #
 .DS_Store

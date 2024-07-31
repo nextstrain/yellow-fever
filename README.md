@@ -3,21 +3,19 @@
 <!-- ##TODO## finish updating this -->
 
 This repository is in the process of being upgraded to follow the
-[pathogen repo
-guide](https://github.com/nextstrain/pathogen-repo-guide/).
+[pathogen repo guide][].
 
 ## Installation
 
-Follow the [standard installation
-instructions](https://docs.nextstrain.org/en/latest/install.html) for
-Nextstrain's suite of software tools.
+Follow the [standard installation instructions][] for Nextstrain's
+suite of software tools.
 
 ## Working on this repo
 
-This repo is configured to use [pre-commit](https://pre-commit.com),
-to help automatically catch common coding errors and syntax issues
-with changes before they are committed to the repo.
-.
+This repo is configured to use [pre-commit][] to help automatically
+catch common coding errors and syntax issues with changes before they
+are committed to the repo.
+
 If you will be writing new code or otherwise working within this repo,
 please do the following to get started:
 
@@ -32,3 +30,7 @@ please do the following to get started:
 Note that these pre-commit checks are also run in a GitHub Action when
 changes are pushed to GitHub, so correcting issues locally will
 prevent extra cycles of correction.
+
+[pathogen repo guide]: https://github.com/nextstrain/pathogen-repo-guide/)
+[pre-commit]: https://pre-commit.com
+[standard installation instructions]: https://docs.nextstrain.org/en/latest/install.html
