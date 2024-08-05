@@ -18,6 +18,11 @@
       "type": "categorical"
     },
     {
+      "key": "clade",
+      "title": "Genotype (via Nextclade tree)",
+      "type": "categorical"
+    },
+    {
       "key": "num_date",
       "title": "Date",
       "type": "continuous"

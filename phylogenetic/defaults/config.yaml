@@ -20,4 +20,6 @@ refine:
 ancestral:
     inference: "joint"
 traits:
-    columns: "region"
+    columns: "clade region"
+export:
+    metadata_columns: "clade region"
