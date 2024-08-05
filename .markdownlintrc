@@ -1,0 +1,9 @@
+{
+  // long lines are okay
+  "MD013":{
+    "line_length": 100,
+    "tables": false
+  },
+  // don't require top-level heading on L1
+  "MD041": false
+}
