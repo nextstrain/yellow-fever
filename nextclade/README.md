@@ -1,7 +1,7 @@
 # Yellow Fever Virus Nextclade Dataset Tree
 
 This workflow creates a phylogenetic tree that can be used as part of
-a Nextclade dataset to assign genotypes to yellow fever virus samples
+a Nextclade dataset to assign clades to yellow fever virus samples
 based on [Mutebi et al.][] (J Virol. 2001 Aug;75(15):6999-7008) and
 [Bryant et al.][] (PLoS Pathog. 2007 May 18;3(5):e75).
 
@@ -13,6 +13,19 @@ based on [Mutebi et al.][] (J Virol. 2001 Aug;75(15):6999-7008) and
   `augur clades`, using clade-defining mutations in `defaults/clades.tsv`
 * Provide the following coloring options on the tree:
   * Genotype assignment from `augur clades`
+
+The clades we annotate (Clade I-VII) are roughly equivalent with the
+following genotypes as described in the aforementioned two papers:
+
+| Clade     | Genotype            |
+|-----------|---------------------|
+| Clade I   | Angola              |
+| Clade II  | East Africa         |
+| Clade III | East Central/Africa |
+| Clade IV  | West Africa I       |
+| Clade V   | West Africa II      |
+| Clade VI  | South America I     |
+| Clade VII | South America II    |
 
 ## How to create a new tree
 
