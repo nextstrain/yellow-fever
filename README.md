@@ -31,6 +31,6 @@ Note that these pre-commit checks are also run in a GitHub Action when
 changes are pushed to GitHub, so correcting issues locally will
 prevent extra cycles of correction.
 
-[pathogen repo guide]: https://github.com/nextstrain/pathogen-repo-guide/)
+[pathogen repo guide]: https://github.com/nextstrain/pathogen-repo-guide/
 [pre-commit]: https://pre-commit.com
 [standard installation instructions]: https://docs.nextstrain.org/en/latest/install.html
