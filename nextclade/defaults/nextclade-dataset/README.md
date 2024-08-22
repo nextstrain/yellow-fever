@@ -10,7 +10,7 @@
 
 ## Scope of this dataset
 
-This dataset assigns genotypes to yellow fever virus samples based on
+This dataset assigns clades to yellow fever virus samples based on
 strain and genotype information from [Mutebi et al.][] (J Virol. 2001
 Aug;75(15):6999-7008) and [Bryant et al.][] (PLoS Pathog. 2007 May 18;3(5):e75)
 
@@ -20,6 +20,19 @@ genome, (bases 641-1310), called the prM-E region. This region
 comprises the 3' end of the pre-membrane protein (prM) gene, the
 entire membrane protein (M) gene, and the 5' end of the envelope
 protein (E) gene.
+
+The clades we annotate (Clade I-VII) are roughly equivalent with the
+following genotypes as described in the aforementioned two papers:
+
+| Clade     | Genotype            |
+|-----------|---------------------|
+| Clade I   | Angola              |
+| Clade II  | East Africa         |
+| Clade III | East Central/Africa |
+| Clade IV  | West Africa I       |
+| Clade V   | West Africa II      |
+| Clade VI  | South America I     |
+| Clade VII | South America II    |
 
 (N.b., the reference sequence used in this data set is actually 672nt
 long, from bases 641-1312 of the genome reference. The 2 extra bases
