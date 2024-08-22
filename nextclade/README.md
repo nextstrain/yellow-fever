@@ -27,6 +27,9 @@ following genotypes as described in the aforementioned two papers:
 | Clade VI  | South America I     |
 | Clade VII | South America II    |
 
+(N.b., this table is available as a TSV in this repo, at
+`nextclade/defaults/clade-to-genotype.tsv`.)
+
 ## How to create a new tree
 
 * Run the workflow: `nextstrain build .`
