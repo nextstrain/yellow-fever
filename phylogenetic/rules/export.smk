@@ -25,7 +25,7 @@ rule export:
     benchmark:
         "benchmarks/{gene}/export.txt"
     shell:
-        """
+        r"""
         augur export v2 \
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \

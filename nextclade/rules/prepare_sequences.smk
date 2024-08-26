@@ -20,7 +20,7 @@ rule align_and_extract_prM_E:
         "benchmarks/align_and_extract_prM_E.txt",
     threads: workflow.cores
     shell:
-        """
+        r"""
         nextclade3 run \
             --jobs {threads:q} \
             --input-ref {input.reference:q} \
@@ -49,7 +49,7 @@ rule filter:
     benchmark:
         "benchmarks/filter.txt"
     shell:
-        """
+        r"""
         augur filter \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \

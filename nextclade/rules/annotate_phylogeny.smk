@@ -16,7 +16,7 @@ rule ancestral:
     benchmark:
         "benchmarks/ancestral.txt",
     shell:
-        """
+        r"""
         augur ancestral \
             --tree {input.tree} \
             --alignment {input.alignment} \
@@ -38,7 +38,7 @@ rule translate:
     benchmark:
         "benchmarks/translate.txt",
     shell:
-        """
+        r"""
         augur translate \
             --tree {input.tree:q} \
             --ancestral-sequences {input.node_data:q} \
@@ -60,7 +60,7 @@ rule clades:
     benchmark:
         "benchmarks/clades.txt",
     shell:
-        """
+        r"""
         augur clades \
             --tree {input.tree:q} \
             --mutations {input.nt_muts} {input.aa_muts} \

@@ -17,7 +17,7 @@ rule ancestral:
     benchmark:
         "benchmarks/{gene}/ancestral.txt"
     shell:
-        """
+        r"""
         augur ancestral \
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
@@ -39,7 +39,7 @@ rule translate:
     benchmark:
         "benchmarks/{gene}/translate.txt"
     shell:
-        """
+        r"""
         augur translate \
             --tree {input.tree:q} \
             --ancestral-sequences {input.node_data:q} \
@@ -64,7 +64,7 @@ rule traits:
     benchmark:
         "benchmarks/{gene}/traits.txt"
     shell:
-        """
+        r"""
         augur traits \
             --tree {input.tree:q} \
             --metadata-id-columns {params.strain_id:q} \

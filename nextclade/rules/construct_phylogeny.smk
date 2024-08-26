@@ -11,7 +11,7 @@ rule tree:
     benchmark:
         "benchmarks/tree.txt",
     shell:
-        """
+        r"""
         augur tree \
             --alignment {input.alignment} \
             --output {output.tree}
@@ -36,7 +36,7 @@ rule refine:
     benchmark:
         "benchmarks/refine.txt",
     shell:
-        """
+        r"""
         augur refine \
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
