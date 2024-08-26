@@ -26,7 +26,7 @@ rule assemble_dataset:
     benchmark:
         "benchmarks/assemble_dataset.txt",
     shell:
-        """
+        r"""
         (
           cp -v {input.reference_fasta:q} {output.reference_fasta:q}
           cp -v {input.tree:q} {output.tree:q}
@@ -57,7 +57,7 @@ rule test_dataset:
     benchmark:
         "benchmarks/test_dataset.txt",
     shell:
-        """
+        r"""
         nextclade run \
             --input-dataset {params.dataset_dir:q} \
             --output-all {output.outdir:q} \

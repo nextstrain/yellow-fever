@@ -16,7 +16,7 @@ DATASET_NAME = config["nextclade"]["dataset_name"]
 #     params:
 #         dataset_name=DATASET_NAME
 #     shell:
-#         """
+#         r"""
 #         nextclade3 dataset get \
 #             --name={params.dataset_name:q} \
 #             --output-zip={output.dataset} \
@@ -40,7 +40,7 @@ rule run_nextclade:
     benchmark:
         "benchmarks/run_nextclade.txt",
     shell:
-        """
+        r"""
         nextclade3 run \
             {input.sequences} \
             --input-dataset {input.dataset} \
@@ -69,7 +69,7 @@ rule join_metadata_and_nextclade:
     benchmark:
         "benchmarks/join_metadata_and_nextclade.txt",
     shell:
-        """
+        r"""
         (
           export SUBSET_FIELDS=`grep -v '^#' {input.nextclade_field_map} | awk '{{print $1}}' | tr '\n' ',' | sed 's/,$//g'`
 

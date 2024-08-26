@@ -31,7 +31,7 @@ rule filter:
     benchmark:
         "benchmarks/{gene}/filter.txt"
     shell:
-        """
+        r"""
         augur filter \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
@@ -58,7 +58,7 @@ rule align:
     benchmark:
         "benchmarks/{gene}/align.txt"
     shell:
-        """
+        r"""
         augur align \
             --sequences {input.sequences} \
             --reference-sequence {input.reference} \

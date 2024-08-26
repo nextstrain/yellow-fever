@@ -23,7 +23,7 @@ rule fetch_general_geolocation_rules:
     benchmark:
         "benchmarks/fetch_general_geolocation_rules.txt"
     shell:
-        """
+        r"""
         curl {params.geolocation_rules_url:q} > {output.general_geolocation_rules:q} \
           2> {log:q}
         """
@@ -40,14 +40,14 @@ rule concat_geolocation_rules:
     benchmark:
         "benchmarks/concat_geolocation_rules.txt"
     shell:
-        """
+        r"""
         cat {input.general_geolocation_rules:q} {input.local_geolocation_rules:q} \
           > {output.all_geolocation_rules:q} 2> {log:q}
         """
 
 
 def format_field_map(field_map: dict[str, str]) -> str:
-    """
+    r"""
     Format dict to `"key1"="value1" "key2"="value2"...` for use in shell commands.
     """
     return " ".join([f'"{key}"="{value}"' for key, value in field_map.items()])
@@ -82,7 +82,7 @@ rule curate:
         id_field=config["curate"]["output_id_field"],
         sequence_field=config["curate"]["output_sequence_field"],
     shell:
-        """
+        r"""
         (cat {input.sequences_ndjson:q} \
             | augur curate rename \
                 --field-map {params.field_map} \
@@ -128,7 +128,7 @@ rule subset_metadata:
     benchmark:
         "benchmarks/subset_metadata.txt"
     shell:
-        """
+        r"""
         tsv-select -H -f {params.metadata_fields:q} \
             {input.metadata:q} \
         > {output.subset_metadata:q} 2> {log:q}
