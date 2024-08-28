@@ -47,7 +47,7 @@ rule concat_geolocation_rules:
 
 
 def format_field_map(field_map: dict[str, str]) -> str:
-    r"""
+    """
     Format dict to `"key1"="value1" "key2"="value2"...` for use in shell commands.
     """
     return " ".join([f'"{key}"="{value}"' for key, value in field_map.items()])
