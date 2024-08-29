@@ -1,5 +1,5 @@
 {
-  "title": "Real-time tracking of yellow fever virus full genome virus evolution",
+  "title": "Real-time tracking of yellow fever virus prM-E region evolution",
   "maintainers": [
     {"name": "John SJ Anderson", "url": "https://bedford.io/team/john-sj-anderson/"},
     {"name": "the Nextstrain team", "url": "https://nextstrain.org/team"}
@@ -23,9 +23,9 @@
       "type": "categorical"
     },
     {
-      "key": "num_date",
+      "key": "date",
       "title": "Date",
-      "type": "continuous"
+      "type": "temporal"
     },
     {
       "key": "region",
