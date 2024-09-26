@@ -13,8 +13,8 @@ rule export:
         aa_muts = "results/{gene}/aa_muts.json",
         traits = "results/{gene}/traits.json",
         colors = config["files"]["colors"],
-        auspice_config = lambda wildcard: "defaults/auspice_config.json" if wildcard.gene in ["genome"] else "defaults/auspice_config_N450.json",
-        description=config["files"]["description"]
+        auspice_config = lambda w: config["files"][w.gene]["auspice_config"],
+        description=config["files"]["description"],
     output:
         auspice_json = "auspice/yellow-fever-virus_{gene}.json"
     params:

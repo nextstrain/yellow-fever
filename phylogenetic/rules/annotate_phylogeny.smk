@@ -7,7 +7,7 @@ rule ancestral:
     """Reconstructing ancestral sequences and mutations"""
     input:
         tree = "results/{gene}/tree.nwk",
-        alignment = "results/{gene}/aligned.fasta"
+        alignment = "results/{gene}/aligned_and_filtered.fasta"
     output:
         node_data = "results/{gene}/nt_muts.json"
     params:
@@ -31,7 +31,7 @@ rule translate:
     input:
         tree = "results/{gene}/tree.nwk",
         node_data = "results/{gene}/nt_muts.json",
-        genemap = "defaults/genemap.gff"
+        genemap = "defaults/genemap_{gene}.gff"
     output:
         node_data = "results/{gene}/aa_muts.json"
     log:

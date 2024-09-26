@@ -5,7 +5,7 @@ This part of the workflow constructs the phylogenetic tree.
 rule tree:
     """Building tree"""
     input:
-        alignment = "results/{gene}/aligned.fasta"
+        alignment = "results/{gene}/aligned_and_filtered.fasta"
     output:
         tree = "results/{gene}/tree_raw.nwk"
     log:
@@ -29,7 +29,7 @@ rule refine:
     """
     input:
         tree = "results/{gene}/tree_raw.nwk",
-        alignment = "results/{gene}/aligned.fasta",
+        alignment = "results/{gene}/aligned_and_filtered.fasta",
         metadata = "../ingest/results/metadata.tsv"
     output:
         tree = "results/{gene}/tree.nwk",
@@ -54,7 +54,6 @@ rule refine:
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
             --coalescent {params.coalescent:q} \
-            --timetree \
             --date-confidence \
             --date-inference {params.date_inference:q} \
             --clock-filter-iqd {params.clock_filter_iqd:q} \
