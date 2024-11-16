@@ -129,6 +129,6 @@ curate:
     - abbr_authors
     - institution
 nextclade:
-  dataset_name: "nextstrain/yellow-fever/prM-E/"
+  dataset_name: "nextstrain/yellow-fever/prM-E"
   field_map: "defaults/nextclade_field_map.tsv"
   id_field: "seqName"
