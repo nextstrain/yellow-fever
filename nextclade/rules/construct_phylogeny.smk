@@ -21,10 +21,7 @@ rule tree:
 rule refine:
     input:
         alignment = "results/aligned.fasta",
-        # TODO once this repo is fully automated and uploading data to
-        # S3, this step should download data from there instead of
-        # depending on the ingest build
-        metadata = "../ingest/results/metadata.tsv",
+        metadata = "data/metadata.tsv",
         tree = "results/tree_raw.nwk",
     output:
         node_data = "results/branch_lengths.json",

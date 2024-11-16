@@ -5,9 +5,6 @@ rule assemble_dataset:
     input:
         reference_fasta="defaults/reference.fasta",
         tree=config["files"]["auspice_json"],
-        # TODO once this repo is fully automated and uploading data to
-        # S3, this step should download data from there instead of
-        # depending on the ingest build
         sequences = "defaults/sequences.fasta",
         annotation="defaults/genome_annotation.gff3",
         pathogen_json="defaults/nextclade-dataset/pathogen.json",
@@ -40,10 +37,7 @@ rule assemble_dataset:
 
 rule test_dataset:
     input:
-        # TODO once this repo is fully automated and uploading data to
-        # S3, this step should download data from there instead of
-        # depending on the ingest build
-        sequences = "../ingest/results/sequences.fasta",
+        sequences = "data/sequences.fasta",
         # this isn't used by the command below, but it is included as
         # an input to force the preceding rule to finish running
         # before this one starts
