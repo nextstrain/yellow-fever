@@ -30,7 +30,7 @@ rule refine:
     input:
         tree = "results/{gene}/tree_raw.nwk",
         alignment = "results/{gene}/aligned_and_filtered.fasta",
-        metadata = "../ingest/results/metadata.tsv"
+        metadata = "data/metadata.tsv"
     output:
         tree = "results/{gene}/tree.nwk",
         node_data = "results/{gene}/branch_lengths.json"

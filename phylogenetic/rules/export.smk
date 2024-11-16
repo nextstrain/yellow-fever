@@ -7,7 +7,7 @@ rule export:
     """Exporting data files for for auspice"""
     input:
         tree = "results/{gene}/tree.nwk",
-        metadata = "../ingest/results/metadata.tsv",
+        metadata = "data/metadata.tsv",
         branch_lengths = "results/{gene}/branch_lengths.json",
         nt_muts = "results/{gene}/nt_muts.json",
         aa_muts = "results/{gene}/aa_muts.json",
