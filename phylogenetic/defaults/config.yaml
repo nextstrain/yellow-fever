@@ -27,6 +27,8 @@ refine:
     coalescent: "opt"
     date_inference: "marginal"
     clock_filter_iqd: 4
+    clock_rate: 0.0002
+    clock_std_dev: 0.00001
 ancestral:
     inference: "joint"
 traits:

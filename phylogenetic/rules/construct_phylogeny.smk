@@ -35,6 +35,8 @@ rule refine:
         tree = "results/{gene}/tree.nwk",
         node_data = "results/{gene}/branch_lengths.json"
     params:
+        clock_rate = config["refine"]["clock_rate"],
+        clock_std_dev = config["refine"]["clock_std_dev"],
         coalescent = config["refine"]["coalescent"],
         date_inference = config["refine"]["date_inference"],
         clock_filter_iqd = config["refine"]["clock_filter_iqd"],
@@ -53,6 +55,8 @@ rule refine:
             --metadata-id-columns {params.strain_id:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
+            --clock-rate {params.clock_rate} \
+            --clock-std-dev {params.clock_std_dev} \
             --coalescent {params.coalescent:q} \
             --date-confidence \
             --date-inference {params.date_inference:q} \
