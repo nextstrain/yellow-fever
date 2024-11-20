@@ -35,6 +35,7 @@ rule refine:
         tree = "results/{gene}/tree.nwk",
         node_data = "results/{gene}/branch_lengths.json"
     params:
+        timetree = lambda w: "--timetree" if w.gene == "genome" else "",
         clock_rate = config["refine"]["clock_rate"],
         clock_std_dev = config["refine"]["clock_std_dev"],
         coalescent = config["refine"]["coalescent"],
@@ -55,6 +56,7 @@ rule refine:
             --metadata-id-columns {params.strain_id:q} \
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
+            {params.timetree:q} \
             --clock-rate {params.clock_rate} \
             --clock-std-dev {params.clock_std_dev} \
             --coalescent {params.coalescent:q} \
