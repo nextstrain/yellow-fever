@@ -35,13 +35,13 @@ rule refine:
         tree = "results/{gene}/tree.nwk",
         node_data = "results/{gene}/branch_lengths.json"
     params:
+        strain_id = config["strain_id_field"],
         timetree = lambda w: "--timetree" if w.gene == "genome" else "",
         clock_rate = config["refine"]["clock_rate"],
         clock_std_dev = config["refine"]["clock_std_dev"],
         coalescent = config["refine"]["coalescent"],
         date_inference = config["refine"]["date_inference"],
         clock_filter_iqd = config["refine"]["clock_filter_iqd"],
-        strain_id = config["strain_id_field"]
     log:
         "logs/{gene}/refine.txt",
     benchmark:
