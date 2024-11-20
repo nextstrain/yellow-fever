@@ -53,7 +53,7 @@ curate:
     host-name: host
     isolate-lineage-source: sample_type
     biosample-acc: biosample_accessions
-    submitter-names: authors
+    submitter-names: full_authors
     submitter-affiliation: institution
     submitter-country: submitter_country
   # Standardized strain name regex
@@ -97,11 +97,11 @@ curate:
       - the
       - y
   # Metadata field that contains the list of authors associated with the sequence
-  authors_field: "authors"
+  authors_field: "full_authors"
   # Default value to use if the authors field is empty
   authors_default_value: "?"
   # Name to use for the generated abbreviated authors field
-  abbr_authors_field: "abbr_authors"
+  abbr_authors_field: "authors"
   # Path to the manual annotations file
   annotations: "defaults/annotations.tsv"
   # The ID field in the metadata to use to merge the manual annotations
@@ -125,8 +125,8 @@ curate:
     - date_released
     - date_updated
     - sra_accessions
+    - full_authors
     - authors
-    - abbr_authors
     - institution
 nextclade:
   dataset_name: "nextstrain/yellow-fever/prM-E"
