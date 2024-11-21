@@ -20,7 +20,7 @@ if __name__ == '__main__':
     assignment = {}
     with open(args.ordering) as f:
         for line in f.readlines():
-            array = line.lstrip().rstrip().split("\t")
+            array = line.strip().split("\t")
             if len(array) == 2:
                 name = array[0]
                 trait = array[1]

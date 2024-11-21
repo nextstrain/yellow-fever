@@ -225,38 +225,11 @@ region	North America
 
 ################
 
-
-recency	Older
-recency	One month ago
-recency	One week ago
-recency	3-7 days ago
-recency	1-2 days ago
-recency	New
-
-################
-
-serotype_genbank	denv1
-serotype_genbank	denv2
-serotype_genbank	denv3
-serotype_genbank	denv4
-
-genotype_nextclade	DENV1/I
-genotype_nextclade	DENV1/II
-genotype_nextclade	DENV1/III
-genotype_nextclade	DENV1/IV
-genotype_nextclade	DENV1/V
-genotype_nextclade	DENV2/AA
-genotype_nextclade	DENV2/AI
-genotype_nextclade	DENV2/AII
-genotype_nextclade	DENV2/AM
-genotype_nextclade	DENV2/C
-genotype_nextclade	DENV2/S
-genotype_nextclade	DENV3/I
-genotype_nextclade	DENV3/II
-genotype_nextclade	DENV3/III
-genotype_nextclade	DENV3/IV
-genotype_nextclade	DENV4/I
-genotype_nextclade	DENV4/II
-genotype_nextclade	DENV4/S
-
-################
+# genotype assigned by Nextclade
+clade	Clade I
+clade	Clade II
+clade	Clade III
+clade	Clade IV
+clade	Clade V
+clade	Clade VI
+clade	Clade VII
