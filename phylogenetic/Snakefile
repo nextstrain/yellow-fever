@@ -5,6 +5,7 @@ gene = ["genome", "prM-E"]
 rule all:
     input:
         auspice_json=expand("auspice/yellow-fever-virus_{gene}.json", gene=gene),
+        tip_frequencies_json=expand("auspice/yellow-fever-virus_{gene}_tip-frequencies.json", gene=gene),
 
 
 include: "rules/prepare_sequences.smk"
