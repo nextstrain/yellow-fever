@@ -30,9 +30,6 @@ rule run_nextclade:
     output:
         nextclade="results/nextclade.tsv",
         alignment="results/alignment.fasta",
-#        translations="results/translations.zip",
-    params:
-#        translations=lambda w: "results/translations/{cds}.fasta",
     log:
         "logs/run_nextclade.txt",
     benchmark:
@@ -46,10 +43,6 @@ rule run_nextclade:
             --output-fasta {output.alignment} \
           &> {log:q}
         """
-        #     --output-translations {params.translations}
-
-        # zip -rj {output.translations} results/translations
-        # """
 
 
 rule join_metadata_and_nextclade:
