@@ -1,6 +1,5 @@
 strain_id_field: "accession"
 files:
-    colors: "defaults/colors.tsv"
     description: "defaults/description.md"
     genome:
         auspice_config: "defaults/auspice_config_genome.json"
