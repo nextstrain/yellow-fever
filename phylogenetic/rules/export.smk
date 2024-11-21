@@ -3,6 +3,23 @@ This part of the workflow collects the phylogenetic tree and annotations to
 export a Nextstrain dataset.
 """
 
+
+rule colors:
+    input:
+        color_schemes = "defaults/color_schemes.tsv",
+        color_orderings = "defaults/color_orderings.tsv",
+        metadata = "data/metadata.tsv",
+    output:
+        colors = "data/colors.tsv"
+    shell:
+        r"""
+        python3 scripts/assign-colors.py \
+        --color-schemes {input.color_schemes} \
+        --ordering {input.color_orderings} \
+        --metadata {input.metadata} \
+        --output {output.colors}
+        """
+
 rule export:
     """Exporting data files for for auspice"""
     input:
@@ -12,7 +29,7 @@ rule export:
         nt_muts = "results/{gene}/nt_muts.json",
         aa_muts = "results/{gene}/aa_muts.json",
         traits = "results/{gene}/traits.json",
-        colors = config["files"]["colors"],
+        colors = "data/colors.tsv",
         auspice_config = lambda w: config["files"][w.gene]["auspice_config"],
         description=config["files"]["description"],
     output:
