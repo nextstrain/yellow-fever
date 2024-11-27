@@ -8,33 +8,28 @@ like to customize the rules
 DATASET_NAME = config["nextclade"]["dataset_name"]
 
 
-# TODO switch to using this once YFV dataset is landed in nextclade_data
-# rule get_nextclade_dataset:
-#     """Download Nextclade dataset"""
-#     output:
-#         dataset=f"data/nextclade_data/{DATASET_NAME}.zip",
-#     params:
-#         dataset_name=DATASET_NAME
-#     shell:
-#         r"""
-#         nextclade3 dataset get \
-#             --name={params.dataset_name:q} \
-#             --output-zip={output.dataset} \
-#             --verbose
-#         """
+rule get_nextclade_dataset:
+    """Download Nextclade dataset"""
+    output:
+        dataset=f"data/nextclade_data/{DATASET_NAME}.zip",
+    params:
+        dataset_name=DATASET_NAME
+    shell:
+        r"""
+        nextclade3 dataset get \
+            --name={params.dataset_name:q} \
+            --output-zip={output.dataset} \
+            --verbose
+        """
 
 
 rule run_nextclade:
     input:
-        # TODO update when above rule is enabled
-        dataset=f"../nextclade/dataset",
+        dataset=f"data/nextclade_data/{DATASET_NAME}.zip",
         sequences="results/sequences.fasta",
     output:
         nextclade="results/nextclade.tsv",
         alignment="results/alignment.fasta",
-#        translations="results/translations.zip",
-    params:
-#        translations=lambda w: "results/translations/{cds}.fasta",
     log:
         "logs/run_nextclade.txt",
     benchmark:
@@ -48,10 +43,6 @@ rule run_nextclade:
             --output-fasta {output.alignment} \
           &> {log:q}
         """
-        #     --output-translations {params.translations}
-
-        # zip -rj {output.translations} results/translations
-        # """
 
 
 rule join_metadata_and_nextclade:

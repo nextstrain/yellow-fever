@@ -3,15 +3,40 @@ This part of the workflow prepares sequences for constructing the
 phylogenetic tree.
 """
 
+rule download:
+    output:
+        metadata="data/metadata.tsv.zst",
+        sequences="data/sequences.fasta.zst",
+    params:
+        sequences_url="https://data.nextstrain.org/files/workflows/yellow-fever/sequences.fasta.zst",
+        metadata_url="https://data.nextstrain.org/files/workflows/yellow-fever/metadata.tsv.zst",
+    shell:
+        r"""
+        curl -fsSL --compressed {params.sequences_url:q} --output {output.sequences}
+        curl -fsSL --compressed {params.metadata_url:q} --output {output.metadata}
+        """
+
+
+rule decompress:
+    input:
+        sequences="data/sequences.fasta.zst",
+        metadata="data/metadata.tsv.zst",
+    output:
+        sequences="data/sequences.fasta",
+        metadata="data/metadata.tsv",
+    shell:
+        r"""
+        zstd -d -c {input.sequences} > {output.sequences}
+        zstd -d -c {input.metadata} > {output.metadata}
+        """
+
+
 rule filter_genome:
     input:
         exclude = config["files"]["genome"]["exclude"],
         include = config["files"]["genome"]["include"],
-        # TODO once this repo is fully automated and uploading data to
-        # S3, this step should download data from there instead of
-        # depending on the ingest build
-        metadata = "../ingest/results/metadata.tsv",
-        sequences = "../ingest/results/sequences.fasta"
+        metadata = "data/metadata.tsv",
+        sequences = "data/sequences.fasta"
     output:
         sequences = "results/genome/filtered.fasta"
     params:
@@ -65,10 +90,7 @@ rule align_genome:
 rule align_and_extract_prME:
     input:
         reference=config["files"]["prM-E"]["reference"],
-        # TODO once this repo is fully automated and uploading data to
-        # S3, this step should download data from there instead of
-        # depending on the ingest build
-        sequences = "../ingest/results/sequences.fasta",
+        sequences = "data/sequences.fasta",
     output:
         alignment = "results/prM-E/aligned.fasta"
     params:
@@ -97,10 +119,7 @@ rule filter_prME:
     input:
         exclude = config["files"]["prM-E"]["exclude"],
         include = config["files"]["prM-E"]["include"],
-        # TODO once this repo is fully automated and uploading data to
-        # S3, this step should download data from there instead of
-        # depending on the ingest build
-        metadata = "../ingest/results/metadata.tsv",
+        metadata = "data/metadata.tsv",
         sequences = "results/prM-E/aligned.fasta"
     output:
         sequences = "results/prM-E/aligned_and_filtered.fasta"

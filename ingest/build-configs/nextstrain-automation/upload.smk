@@ -28,7 +28,7 @@ rule upload_to_s3:
         s3_dst=config["s3_dst"],
         cloudfront_domain=config["cloudfront_domain"],
     shell:
-        """
+        r"""
         ./vendored/upload-to-s3 \
             {params.quiet} \
             {input.file_to_upload:q} \
@@ -39,6 +39,9 @@ rule upload_to_s3:
 
 rule upload_all:
     input:
-        uploads=[f"results/upload/{remote_file}.upload" for remote_file in config["files_to_upload"].keys()],
+        uploads=[
+            f"results/upload/{remote_file}.upload"
+            for remote_file in config["files_to_upload"].keys()
+        ],
     output:
         touch("results/upload_all.done"),

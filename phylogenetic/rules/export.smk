@@ -3,16 +3,33 @@ This part of the workflow collects the phylogenetic tree and annotations to
 export a Nextstrain dataset.
 """
 
+
+rule colors:
+    input:
+        color_schemes = "defaults/color_schemes.tsv",
+        color_orderings = "defaults/color_orderings.tsv",
+        metadata = "data/metadata.tsv",
+    output:
+        colors = "data/colors.tsv"
+    shell:
+        r"""
+        python3 scripts/assign-colors.py \
+        --color-schemes {input.color_schemes} \
+        --ordering {input.color_orderings} \
+        --metadata {input.metadata} \
+        --output {output.colors}
+        """
+
 rule export:
     """Exporting data files for for auspice"""
     input:
         tree = "results/{gene}/tree.nwk",
-        metadata = "../ingest/results/metadata.tsv",
+        metadata = "data/metadata.tsv",
         branch_lengths = "results/{gene}/branch_lengths.json",
         nt_muts = "results/{gene}/nt_muts.json",
         aa_muts = "results/{gene}/aa_muts.json",
         traits = "results/{gene}/traits.json",
-        colors = config["files"]["colors"],
+        colors = "data/colors.tsv",
         auspice_config = lambda w: config["files"][w.gene]["auspice_config"],
         description=config["files"]["description"],
     output:
@@ -38,4 +55,34 @@ rule export:
             --output {output.auspice_json:q} \
             --description {input.description:q} \
           2> {log:q}
+        """
+
+
+rule tip_frequencies:
+    """
+    Estimating KDE frequencies for tips
+    """
+    input:
+        tree = "results/{gene}/tree.nwk",
+        metadata = "data/metadata.tsv"
+    output:
+        tip_freq = "auspice/yellow-fever-virus_{gene}_tip-frequencies.json"
+    params:
+        strain_id = config["strain_id_field"],
+        min_date = config["tip_frequencies"]["min_date"],
+        max_date = config["tip_frequencies"]["max_date"],
+        narrow_bandwidth = config["tip_frequencies"]["narrow_bandwidth"],
+        wide_bandwidth = config["tip_frequencies"]["wide_bandwidth"]
+    shell:
+        r"""
+        augur frequencies \
+            --method kde \
+            --tree {input.tree} \
+            --metadata {input.metadata} \
+            --metadata-id-columns {params.strain_id} \
+            --min-date {params.min_date} \
+            --max-date {params.max_date} \
+            --narrow-bandwidth {params.narrow_bandwidth} \
+            --wide-bandwidth {params.wide_bandwidth} \
+            --output {output.tip_freq}
         """

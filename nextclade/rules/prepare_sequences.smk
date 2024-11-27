@@ -2,12 +2,37 @@
 This part of the workflow prepares sequences for constructing the
 phylogenetic tree.
 """
+rule download:
+    output:
+        metadata="data/metadata.tsv.zst",
+        sequences="data/sequences.fasta.zst",
+    params:
+        sequences_url="https://data.nextstrain.org/files/workflows/yellow-fever/sequences.fasta.zst",
+        metadata_url="https://data.nextstrain.org/files/workflows/yellow-fever/metadata.tsv.zst",
+    shell:
+        r"""
+        curl -fsSL --compressed {params.sequences_url:q} --output {output.sequences}
+        curl -fsSL --compressed {params.metadata_url:q} --output {output.metadata}
+        """
+
+
+rule decompress:
+    input:
+        sequences="data/sequences.fasta.zst",
+        metadata="data/metadata.tsv.zst",
+    output:
+        sequences="data/sequences.fasta",
+        metadata="data/metadata.tsv",
+    shell:
+        r"""
+        zstd -d -c {input.sequences} > {output.sequences}
+        zstd -d -c {input.metadata} > {output.metadata}
+        """
+
+
 rule align_and_extract_prM_E:
     input:
-        # TODO once this repo is fully automated and uploading data to
-        # S3, this step should download data from there instead of
-        # depending on the ingest build
-        sequences = "../ingest/results/sequences.fasta",
+        sequences = "data/sequences.fasta",
         reference = config["files"]["reference_prM-E_fasta"],
     output:
         sequences = "results/sequences.fasta",
@@ -32,13 +57,11 @@ rule align_and_extract_prM_E:
           &> {log:q}
         """
 
+
 rule filter:
     input:
         include = config["files"]["include"],
-        # TODO once this repo is fully automated and uploading data to
-        # S3, this step should download data from there instead of
-        # depending on the ingest build
-        metadata = "../ingest/results/metadata.tsv",
+        metadata = "data/metadata.tsv",
         sequences = "results/sequences.fasta",
     output:
         sequences = "results/aligned.fasta",
