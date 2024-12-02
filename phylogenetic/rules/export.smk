@@ -23,24 +23,24 @@ rule colors:
 rule export:
     """Exporting data files for for auspice"""
     input:
-        tree = "results/{gene}/tree.nwk",
+        tree = "results/{build}/tree.nwk",
         metadata = "data/metadata.tsv",
-        branch_lengths = "results/{gene}/branch_lengths.json",
-        nt_muts = "results/{gene}/nt_muts.json",
-        aa_muts = "results/{gene}/aa_muts.json",
-        traits = "results/{gene}/traits.json",
+        branch_lengths = "results/{build}/branch_lengths.json",
+        nt_muts = "results/{build}/nt_muts.json",
+        aa_muts = "results/{build}/aa_muts.json",
+        traits = "results/{build}/traits.json",
         colors = "data/colors.tsv",
-        auspice_config = lambda w: config["files"][w.gene]["auspice_config"],
+        auspice_config = lambda w: config["files"][w.build]["auspice_config"],
         description=config["files"]["description"],
     output:
-        auspice_json = "auspice/yellow-fever-virus_{gene}.json"
+        auspice_json = "auspice/yellow-fever-virus_{build}.json"
     params:
         metadata_columns = config["export"]["metadata_columns"],
         strain_id = config["strain_id_field"],
     log:
-        "logs/{gene}/export.txt",
+        "logs/{build}/export.txt",
     benchmark:
-        "benchmarks/{gene}/export.txt"
+        "benchmarks/{build}/export.txt"
     shell:
         r"""
         augur export v2 \
@@ -63,10 +63,10 @@ rule tip_frequencies:
     Estimating KDE frequencies for tips
     """
     input:
-        tree = "results/{gene}/tree.nwk",
+        tree = "results/{build}/tree.nwk",
         metadata = "data/metadata.tsv"
     output:
-        tip_freq = "auspice/yellow-fever-virus_{gene}_tip-frequencies.json"
+        tip_freq = "auspice/yellow-fever-virus_{build}_tip-frequencies.json"
     params:
         strain_id = config["strain_id_field"],
         min_date = config["tip_frequencies"]["min_date"],
