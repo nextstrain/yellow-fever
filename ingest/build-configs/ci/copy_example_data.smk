@@ -23,3 +23,16 @@ rule copy_example_nextclade_data:
         """
 # force this rule over Nextclade data fetch
 ruleorder: copy_example_nextclade_data > get_nextclade_dataset
+
+
+rule copy_example_geolocation_rules:
+    input:
+        general_geolocation_rules="example-data/general-geolocation-rules.tsv"
+    output:
+        general_geolocation_rules="data/general-geolocation-rules.tsv",
+    shell:
+        r"""
+        cp -f {input.general_geolocation_rules} {output.general_geolocation_rules}
+        """
+# force this rule over downloading geolocation rules
+ruleorder: copy_example_geolocation_rules > fetch_general_geolocation_rules
