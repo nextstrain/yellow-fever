@@ -5,13 +5,13 @@ This part of the workflow constructs the phylogenetic tree.
 rule tree:
     """Building tree"""
     input:
-        alignment = "results/{gene}/aligned_and_filtered.fasta"
+        alignment = "results/{build}/aligned_and_filtered.fasta"
     output:
-        tree = "results/{gene}/tree_raw.nwk"
+        tree = "results/{build}/tree_raw.nwk"
     log:
-        "logs/{gene}/tree.txt",
+        "logs/{build}/tree.txt",
     benchmark:
-        "benchmarks/{gene}/tree.txt"
+        "benchmarks/{build}/tree.txt"
     shell:
         r"""
         augur tree \
@@ -28,24 +28,24 @@ rule refine:
       - filter tips more than {params.clock_filter_iqd} IQDs from clock expectation
     """
     input:
-        tree = "results/{gene}/tree_raw.nwk",
-        alignment = "results/{gene}/aligned_and_filtered.fasta",
+        tree = "results/{build}/tree_raw.nwk",
+        alignment = "results/{build}/aligned_and_filtered.fasta",
         metadata = "data/metadata.tsv"
     output:
-        tree = "results/{gene}/tree.nwk",
-        node_data = "results/{gene}/branch_lengths.json"
+        tree = "results/{build}/tree.nwk",
+        node_data = "results/{build}/branch_lengths.json"
     params:
         strain_id = config["strain_id_field"],
-        timetree = lambda w: "--timetree" if w.gene == "genome" else "",
+        timetree = lambda w: "--timetree" if w.build == "genome" else "",
         clock_rate = config["refine"]["clock_rate"],
         clock_std_dev = config["refine"]["clock_std_dev"],
         coalescent = config["refine"]["coalescent"],
         date_inference = config["refine"]["date_inference"],
         clock_filter_iqd = config["refine"]["clock_filter_iqd"],
     log:
-        "logs/{gene}/refine.txt",
+        "logs/{build}/refine.txt",
     benchmark:
-        "benchmarks/{gene}/refine.txt"
+        "benchmarks/{build}/refine.txt"
     shell:
         r"""
         augur refine \

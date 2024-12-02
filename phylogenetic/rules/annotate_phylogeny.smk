@@ -6,16 +6,16 @@ phylogenetic tree.
 rule ancestral:
     """Reconstructing ancestral sequences and mutations"""
     input:
-        tree = "results/{gene}/tree.nwk",
-        alignment = "results/{gene}/aligned_and_filtered.fasta"
+        tree = "results/{build}/tree.nwk",
+        alignment = "results/{build}/aligned_and_filtered.fasta"
     output:
-        node_data = "results/{gene}/nt_muts.json"
+        node_data = "results/{build}/nt_muts.json"
     params:
         inference = config["ancestral"]["inference"]
     log:
-        "logs/{gene}/ancestral.txt",
+        "logs/{build}/ancestral.txt",
     benchmark:
-        "benchmarks/{gene}/ancestral.txt"
+        "benchmarks/{build}/ancestral.txt"
     shell:
         r"""
         augur ancestral \
@@ -29,15 +29,15 @@ rule ancestral:
 rule translate:
     """Translating amino acid sequences"""
     input:
-        tree = "results/{gene}/tree.nwk",
-        node_data = "results/{gene}/nt_muts.json",
-        genemap = "defaults/genemap_{gene}.gff"
+        tree = "results/{build}/tree.nwk",
+        node_data = "results/{build}/nt_muts.json",
+        genemap = "defaults/genemap_{build}.gff"
     output:
-        node_data = "results/{gene}/aa_muts.json"
+        node_data = "results/{build}/aa_muts.json"
     log:
-        "logs/{gene}/translate.txt",
+        "logs/{build}/translate.txt",
     benchmark:
-        "benchmarks/{gene}/translate.txt"
+        "benchmarks/{build}/translate.txt"
     shell:
         r"""
         augur translate \
@@ -52,17 +52,17 @@ rule translate:
 rule traits:
     """Inferring ancestral traits for {params.columns!s}"""
     input:
-        tree = "results/{gene}/tree.nwk",
+        tree = "results/{build}/tree.nwk",
         metadata = "data/metadata.tsv",
     output:
-        node_data = "results/{gene}/traits.json",
+        node_data = "results/{build}/traits.json",
     params:
         columns = config["traits"]["columns"],
         strain_id = config["strain_id_field"],
     log:
-        "logs/{gene}/traits.txt",
+        "logs/{build}/traits.txt",
     benchmark:
-        "benchmarks/{gene}/traits.txt"
+        "benchmarks/{build}/traits.txt"
     shell:
         r"""
         augur traits \
