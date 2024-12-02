@@ -1,11 +1,9 @@
 configfile: "defaults/config.yaml"
 
-builds = ["genome", "prM-E"]
-
 rule all:
     input:
-        auspice_json=expand("auspice/yellow-fever-virus_{build}.json", build=builds),
-        tip_frequencies_json=expand("auspice/yellow-fever-virus_{build}_tip-frequencies.json", build=builds),
+        auspice_json=expand("auspice/yellow-fever-virus_{build}.json", build=config["builds"]),
+        tip_frequencies_json=expand("auspice/yellow-fever-virus_{build}_tip-frequencies.json", build=config["builds"]),
 
 
 include: "rules/prepare_sequences.smk"

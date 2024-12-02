@@ -1,3 +1,6 @@
+builds:
+    - "genome"
+    - "prM-E"
 strain_id_field: "accession"
 files:
     description: "defaults/description.md"
