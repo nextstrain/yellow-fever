@@ -23,11 +23,6 @@
       "type": "categorical"
     },
     {
-      "key": "date",
-      "title": "Date",
-      "type": "temporal"
-    },
-    {
       "key": "region",
       "title": "Region",
       "type": "categorical"
