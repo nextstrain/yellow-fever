@@ -19,7 +19,7 @@
     },
     {
       "key": "clade",
-      "title": "Genotype (via Nextclade tree)",
+      "title": "Clade (via Nextclade tree)",
       "type": "categorical"
     },
     {
