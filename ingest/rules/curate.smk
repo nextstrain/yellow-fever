@@ -59,7 +59,7 @@ rule curate:
         all_geolocation_rules="data/all-geolocation-rules.tsv",
         annotations=config["curate"]["annotations"],
     output:
-        metadata="data/all_metadata.tsv",
+        metadata=temp("data/all_metadata_intermediate.tsv"),
         sequences="results/sequences.fasta",
     log:
         "logs/curate.txt",
@@ -115,6 +115,23 @@ rule curate:
         ) 2> {log:q}
         """
 
+
+rule add_genbank_url:
+    input:
+        metadata=temp("data/all_metadata_intermediate.tsv"),
+    output:
+        metadata="data/all_metadata.tsv",
+    log:
+        "logs/add_genbank_url.txt",
+    benchmark:
+        "benchmarks/add_genbank_url.txt",
+    shell:
+        r"""
+        csvtk mutate2 -t \
+          -n url \
+          -e '"https://www.ncbi.nlm.nih.gov/nuccore/" + $accession' \
+          {input.metadata:q} > {output.metadata:q} 2> {log:q}
+        """
 
 rule subset_metadata:
     input:
