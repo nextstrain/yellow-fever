@@ -64,9 +64,9 @@ rule join_metadata_and_nextclade:
         (
           export SUBSET_FIELDS=`grep -v '^#' {input.nextclade_field_map} | awk '{{print $1}}' | tr '\n' ',' | sed 's/,$//g'`
 
-          csvtk -tl cut -f $SUBSET_FIELDS \
+          csvtk -t cut -f $SUBSET_FIELDS \
               {input.nextclade} \
-          | csvtk -tl rename2 \
+          | csvtk -t rename2 \
               -F \
               -f '*' \
               -p '(.+)' \
