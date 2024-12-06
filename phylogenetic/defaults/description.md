@@ -14,20 +14,23 @@ Our bioinformatic processing workflow can be found at
 
 - sequence alignment by [augur align][]
 - phylogenetic reconstruction using [IQTREE-2][]
+- clade assignment using [Nextclade][]
 - ancestral state reconstruction and temporal inference using [TreeTime][]
 
 #### Underlying data
 
 We curate sequence data and metadata from NCBI as starting point for
-our analyses.
+our analyses. We gratefully acknowledge the large contribution of over
+500 sequences from Hill, et al.
 
 ---
 
 Screenshots may be used under a [CC-BY-4.0 license][] and attribution
 to nextstrain.org must be provided.
 
-[CC-BY-4.0 license]: https://creativecommons.org/licenses/by/4.0/
-[IQTREE-2]: http://www.iqtree.org/
-[TreeTime]: https://github.com/neherlab/treetime
+[github.com/nextstrain/yellow-fever]: https://github.com/nextstrain/yellow-fever
 [augur align]: https://docs.nextstrain.org/projects/augur/en/stable/usage/cli/align.html
-[github.com/nextstrain/yellow-fever]: https://github.com/nextstrain/measles
+[IQTREE-2]: http://www.iqtree.org/
+[Nextclade]: https://nextstrain.org/fetch/data.clades.nextstrain.org/v3/nextstrain/yellow-fever/prM-E/2024-11-05--09-19-52Z/tree.json
+[TreeTime]: https://github.com/neherlab/treetime
+[CC-BY-4.0 license]: https://creativecommons.org/licenses/by/4.0/

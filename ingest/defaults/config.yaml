@@ -128,6 +128,7 @@ curate:
     - full_authors
     - authors
     - institution
+    - url
 nextclade:
   dataset_name: "nextstrain/yellow-fever/prM-E"
   field_map: "defaults/nextclade_field_map.tsv"
