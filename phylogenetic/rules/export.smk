@@ -33,7 +33,7 @@ rule export:
         auspice_config = lambda w: config["files"][w.build]["auspice_config"],
         description=config["files"]["description"],
     output:
-        auspice_json = "auspice/yellow-fever-virus_{build}.json"
+        auspice_json = "auspice/yellow-fever_{build}.json"
     params:
         metadata_columns = config["export"]["metadata_columns"],
         strain_id = config["strain_id_field"],
@@ -66,7 +66,7 @@ rule tip_frequencies:
         tree = "results/{build}/tree.nwk",
         metadata = "data/metadata.tsv"
     output:
-        tip_freq = "auspice/yellow-fever-virus_{build}_tip-frequencies.json"
+        tip_freq = "auspice/yellow-fever_{build}_tip-frequencies.json"
     params:
         strain_id = config["strain_id_field"],
         min_date = config["tip_frequencies"]["min_date"],
