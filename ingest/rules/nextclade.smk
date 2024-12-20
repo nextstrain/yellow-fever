@@ -45,6 +45,31 @@ rule run_nextclade:
         """
 
 
+rule nextclade_metadata:
+    input:
+        nextclade="results/nextclade.tsv",
+    output:
+        nextclade_metadata=temp("results/nextclade_metadata.tsv"),
+    params:
+        nextclade_id_field=config["nextclade"]["id_field"],
+        nextclade_field_map=[f"{old}={new}" for old, new in config["nextclade"]["field_map"].items()],
+        nextclade_fields=",".join(config["nextclade"]["field_map"].values()),
+    log:
+        "logs/nextclade_metadata.txt",
+    benchmark:
+        "benchmarks/nextclade_metadata.tsv",
+    shell:
+        r"""
+        augur curate rename \
+            --metadata {input.nextclade:q} \
+            --id-column {params.nextclade_id_field:q} \
+            --field-map {params.nextclade_field_map:q} \
+            --output-metadata - \
+          | csvtk cut --tabs --fields {params.nextclade_fields:q} \
+        > {output.nextclade_metadata:q} 2> {log:q}
+        """
+
+
 rule join_metadata_and_nextclade:
     input:
         nextclade="results/nextclade.tsv",
