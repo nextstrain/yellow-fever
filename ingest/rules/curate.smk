@@ -146,7 +146,7 @@ rule subset_metadata:
         "benchmarks/subset_metadata.txt"
     shell:
         r"""
-        tsv-select -H -f {params.metadata_fields:q} \
+        csvtk cut -t -f {params.metadata_fields:q} \
             {input.metadata:q} \
         > {output.subset_metadata:q} 2> {log:q}
         """
