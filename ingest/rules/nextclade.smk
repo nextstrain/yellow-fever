@@ -72,9 +72,8 @@ rule nextclade_metadata:
 
 rule join_metadata_and_nextclade:
     input:
-        nextclade="results/nextclade.tsv",
         metadata="data/subset_metadata.tsv",
-        nextclade_field_map=config["nextclade"]["field_map"],
+        nextclade_metadata="results/nextclade_metadata.tsv",
     output:
         metadata="results/metadata.tsv",
     params:
@@ -86,25 +85,14 @@ rule join_metadata_and_nextclade:
         "benchmarks/join_metadata_and_nextclade.txt",
     shell:
         r"""
-        (
-          export SUBSET_FIELDS=`grep -v '^#' {input.nextclade_field_map} | awk '{{print $1}}' | tr '\n' ',' | sed 's/,$//g'`
-
-          csvtk -t cut -f $SUBSET_FIELDS \
-              {input.nextclade} \
-          | csvtk -t rename2 \
-              -F \
-              -f '*' \
-              -p '(.+)' \
-              -r '{{kv}}' \
-              -k {input.nextclade_field_map} \
-          | tsv-join -H \
-              --filter-file - \
-              --key-fields {params.nextclade_id_field} \
-              --data-fields {params.metadata_id_field} \
-              --append-fields '*' \
-              --write-all ? \
-              {input.metadata} \
-          | tsv-select -H --exclude {params.nextclade_id_field} \
-              > {output.metadata}
-        ) 2>{log:q}
+        augur merge \
+            --metadata \
+                metadata={input.metadata:q} \
+                nextclade={input.nextclade_metadata:q} \
+            --metadata-id-columns \
+                metadata={params.metadata_id_field:q} \
+                nextclade={params.nextclade_id_field:q} \
+            --output-metadata {output.metadata:q} \
+            --no-source-columns \
+        &> {log:q}
         """
