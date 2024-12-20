@@ -118,7 +118,7 @@ rule curate:
 
 rule add_genbank_url:
     input:
-        metadata=temp("data/all_metadata_intermediate.tsv"),
+        metadata="data/all_metadata_intermediate.tsv",
     output:
         metadata="data/all_metadata.tsv",
     log:
