@@ -183,7 +183,7 @@ FEATURES             Location/Qualifiers
                      /note="methyltransferase component of capping enzyme;
                      non-structural protein NS5"
                      /protein_id="NP_776009.1"
-ORIGIN      
+ORIGIN
         1 agtaaatcct gtgtgctaat tgaggtgcat tggtctgcaa atcgagttgc taggcaataa
        61 acacatttgg attaatttta atcgttcgtt gagcgattag cagagaactg accagaacat
       121 gtctggtcgt aaagctcagg gaaaaaccct gggcgtcaat atggtacgac gaggagttcg
@@ -367,4 +367,3 @@ ORIGIN
     10801 ggtctgtgag cacagtttgc tcaagaataa gcagaccttt ggatgacaaa cacaaaacca
     10861 ct
 //
-
