@@ -73,7 +73,7 @@ jobs:
   # so if the workflow has not been run over 7 days then it will trigger phylogenetic.
   check-new-data:
     needs: [ingest]
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       cache-hit: ${{ steps.check-cache.outputs.cache-hit }}
     steps:
