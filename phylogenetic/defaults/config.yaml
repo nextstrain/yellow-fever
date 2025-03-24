@@ -42,5 +42,6 @@ tip_frequencies:
     # 0.250 = 3 / 12 (three months)
     wide_bandwidth: 0.250
     proportion_wide: 0
+    pivot_interval: 1
 export:
     metadata_columns: "clade region"

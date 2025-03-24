@@ -72,7 +72,8 @@ rule tip_frequencies:
         min_date = config["tip_frequencies"]["min_date"],
         narrow_bandwidth = config["tip_frequencies"]["narrow_bandwidth"],
         wide_bandwidth = config["tip_frequencies"]["wide_bandwidth"],
-        proportion_wide = config["tip_frequencies"]["proportion_wide"]
+        proportion_wide = config["tip_frequencies"]["proportion_wide"],
+        pivot_interval = config["tip_frequencies"]["pivot_interval"]
     shell:
         r"""
         augur frequencies \
@@ -84,5 +85,6 @@ rule tip_frequencies:
             --narrow-bandwidth {params.narrow_bandwidth} \
             --wide-bandwidth {params.wide_bandwidth} \
             --proportion-wide {params.proportion_wide} \
+            --pivot-interval {params.pivot_interval} \
             --output {output.tip_freq}
         """
