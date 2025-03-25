@@ -70,9 +70,10 @@ rule tip_frequencies:
     params:
         strain_id = config["strain_id_field"],
         min_date = config["tip_frequencies"]["min_date"],
-        max_date = config["tip_frequencies"]["max_date"],
         narrow_bandwidth = config["tip_frequencies"]["narrow_bandwidth"],
-        wide_bandwidth = config["tip_frequencies"]["wide_bandwidth"]
+        wide_bandwidth = config["tip_frequencies"]["wide_bandwidth"],
+        proportion_wide = config["tip_frequencies"]["proportion_wide"],
+        pivot_interval = config["tip_frequencies"]["pivot_interval"]
     shell:
         r"""
         augur frequencies \
@@ -81,8 +82,9 @@ rule tip_frequencies:
             --metadata {input.metadata} \
             --metadata-id-columns {params.strain_id} \
             --min-date {params.min_date} \
-            --max-date {params.max_date} \
             --narrow-bandwidth {params.narrow_bandwidth} \
             --wide-bandwidth {params.wide_bandwidth} \
+            --proportion-wide {params.proportion_wide} \
+            --pivot-interval {params.pivot_interval} \
             --output {output.tip_freq}
         """
