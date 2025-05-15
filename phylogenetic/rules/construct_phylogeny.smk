@@ -14,10 +14,11 @@ rule tree:
         "benchmarks/{build}/tree.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur tree \
             --alignment {input.alignment:q} \
             --output {output.tree:q}
-          2> {log:q}
         """
 
 rule refine:
@@ -48,6 +49,8 @@ rule refine:
         "benchmarks/{build}/refine.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur refine \
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
@@ -63,6 +66,5 @@ rule refine:
             --date-confidence \
             --date-inference {params.date_inference:q} \
             --clock-filter-iqd {params.clock_filter_iqd:q} \
-            --stochastic-resolve \
-          2> {log:q}
+            --stochastic-resolve
         """

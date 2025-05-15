@@ -18,12 +18,13 @@ rule ancestral:
         "benchmarks/{build}/ancestral.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur ancestral \
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
             --output-node-data {output.node_data:q} \
-            --inference {params.inference:q} \
-          2> {log:q}
+            --inference {params.inference:q}
         """
 
 rule translate:
@@ -40,12 +41,13 @@ rule translate:
         "benchmarks/{build}/translate.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur translate \
             --tree {input.tree:q} \
             --ancestral-sequences {input.node_data:q} \
             --reference-sequence {input.genemap:q} \
-            --output {output.node_data:q} \
-          2> {log:q}
+            --output {output.node_data:q}
         """
 
 
@@ -65,12 +67,13 @@ rule traits:
         "benchmarks/{build}/traits.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur traits \
             --tree {input.tree:q} \
             --metadata-id-columns {params.strain_id:q} \
             --metadata {input.metadata:q} \
             --output {output.node_data:q} \
             --columns {params.columns} \
-            --confidence \
-          2> {log:q}
+            --confidence
         """

@@ -10,8 +10,14 @@ rule download:
     params:
         sequences_url="https://data.nextstrain.org/files/workflows/yellow-fever/sequences.fasta.zst",
         metadata_url="https://data.nextstrain.org/files/workflows/yellow-fever/metadata.tsv.zst",
+    log:
+        "logs/download.txt",
+    benchmark:
+        "benchmarks/download.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         curl -fsSL --compressed {params.sequences_url:q} --output {output.sequences}
         curl -fsSL --compressed {params.metadata_url:q} --output {output.metadata}
         """
@@ -24,8 +30,14 @@ rule decompress:
     output:
         sequences="data/sequences.fasta",
         metadata="data/metadata.tsv",
+    log:
+        "logs/decompress.txt",
+    benchmark:
+        "benchmarks/decompress.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         zstd -d -c {input.sequences} > {output.sequences}
         zstd -d -c {input.metadata} > {output.metadata}
         """
@@ -51,6 +63,8 @@ rule filter_genome:
         "benchmarks/genome/filter_genome.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur filter \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
@@ -61,8 +75,7 @@ rule filter_genome:
             --group-by {params.group_by} \
             --sequences-per-group {params.sequences_per_group:q} \
             --min-date {params.min_date:q} \
-            --min-length {params.min_length:q} \
-          2> {log:q}
+            --min-length {params.min_length:q}
         """
 
 rule align_genome:
@@ -77,13 +90,14 @@ rule align_genome:
         "benchmarks/genome/align_genome.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur align \
             --sequences {input.sequences} \
             --reference-sequence {input.reference} \
             --output {output.alignment} \
             --fill-gaps \
-            --remove-reference \
-          2> {log:q}
+            --remove-reference
         """
 
 
@@ -100,18 +114,19 @@ rule align_and_extract_prME:
         sequences_per_group = config["filter"]["prM-E"]["sequences_per_group"],
         strain_id = config["strain_id_field"]
     log:
-        "logs/genome/filter_and_extract_prM-E.txt",
+        "logs/prM-E/filter_and_extract_prM-E.txt",
     benchmark:
-        "benchmarks/genome/filter_and_extract_prM-E.txt"
+        "benchmarks/prM-E/filter_and_extract_prM-E.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur align \
             --sequences {input.sequences} \
             --reference-sequence {input.reference} \
             --output {output.alignment} \
             --fill-gaps \
-            --remove-reference \
-          2> {log:q}
+            --remove-reference
         """
 
 
@@ -130,11 +145,13 @@ rule filter_prME:
         sequences_per_group = config["filter"]["prM-E"]["sequences_per_group"],
         strain_id = config["strain_id_field"]
     log:
-        "logs/genome/filter_prM-E.txt",
+        "logs/prM-E/filter_prM-E.txt",
     benchmark:
-        "benchmarks/genome/filter_prM-E.txt"
+        "benchmarks/prM-E/filter_prM-E.txt"
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur filter \
             --sequences {input.sequences:q} \
             --metadata {input.metadata:q} \
@@ -145,6 +162,5 @@ rule filter_prME:
             --group-by {params.group_by} \
             --sequences-per-group {params.sequences_per_group:q} \
             --min-date {params.min_date:q} \
-            --min-length {params.min_length:q} \
-          2> {log:q}
+            --min-length {params.min_length:q}
         """
