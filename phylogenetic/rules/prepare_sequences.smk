@@ -71,7 +71,7 @@ rule filter_genome:
             --metadata-id-columns {params.strain_id:q} \
             --exclude {input.exclude:q} \
             --include {input.include:q} \
-            --output {output.sequences:q} \
+            --output-sequences {output.sequences:q} \
             --group-by {params.group_by} \
             --sequences-per-group {params.sequences_per_group:q} \
             --min-date {params.min_date:q} \
@@ -158,7 +158,7 @@ rule filter_prME:
             --metadata-id-columns {params.strain_id:q} \
             --exclude {input.exclude:q} \
             --include {input.include:q} \
-            --output {output.sequences:q} \
+            --output-sequences {output.sequences:q} \
             --group-by {params.group_by} \
             --sequences-per-group {params.sequences_per_group:q} \
             --min-date {params.min_date:q} \
