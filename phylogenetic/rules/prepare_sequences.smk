@@ -84,6 +84,8 @@ rule align_genome:
         reference=config["files"]["genome"]["reference"],
     output:
         alignment="results/genome/aligned_and_filtered.fasta",
+    threads:
+        workflow.cores
     log:
         "logs/genome/align_genome.txt",
     benchmark:
@@ -96,6 +98,7 @@ rule align_genome:
             --sequences {input.sequences} \
             --reference-sequence {input.reference} \
             --output {output.alignment} \
+            --nthreads {threads} \
             --fill-gaps \
             --remove-reference
         """
@@ -113,6 +116,8 @@ rule align_and_extract_prME:
         min_length = config["filter"]["prM-E"]["min_length"],
         sequences_per_group = config["filter"]["prM-E"]["sequences_per_group"],
         strain_id = config["strain_id_field"]
+    threads:
+        workflow.cores
     log:
         "logs/prM-E/filter_and_extract_prM-E.txt",
     benchmark:
@@ -125,6 +130,7 @@ rule align_and_extract_prME:
             --sequences {input.sequences} \
             --reference-sequence {input.reference} \
             --output {output.alignment} \
+            --nthreads {threads} \
             --fill-gaps \
             --remove-reference
         """
