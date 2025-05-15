@@ -23,6 +23,8 @@ rule export:
         "benchmarks/export.txt",
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur export v2 \
             --tree {input.tree:q} \
             --metadata {input.metadata:q} \
@@ -32,6 +34,5 @@ rule export:
             --metadata-columns {params.metadata_columns} \
             --auspice-config {input.auspice_config:q} \
             --include-root-sequence-inline \
-            --output {output.auspice_json:q} \
-          &> {log:q}
+            --output {output.auspice_json:q}
         """
