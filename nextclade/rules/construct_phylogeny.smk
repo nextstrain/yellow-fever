@@ -12,10 +12,11 @@ rule tree:
         "benchmarks/tree.txt",
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur tree \
             --alignment {input.alignment} \
             --output {output.tree}
-          &> {log:q}
         """
 
 rule refine:
@@ -34,6 +35,8 @@ rule refine:
         "benchmarks/refine.txt",
     shell:
         r"""
+        exec &> >(tee {log:q})
+
         augur refine \
             --tree {input.tree:q} \
             --alignment {input.alignment:q} \
@@ -42,5 +45,4 @@ rule refine:
             --output-tree {output.tree:q} \
             --output-node-data {output.node_data:q} \
             --root mid_point
-          &> {log:q}
         """
