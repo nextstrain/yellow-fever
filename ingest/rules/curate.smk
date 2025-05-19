@@ -13,43 +13,6 @@ OUTPUTS:
 """
 
 
-rule fetch_general_geolocation_rules:
-    output:
-        general_geolocation_rules="data/general-geolocation-rules.tsv",
-    params:
-        geolocation_rules_url=config["curate"]["geolocation_rules_url"],
-    log:
-        "logs/fetch_general_geolocation_rules.txt",
-    benchmark:
-        "benchmarks/fetch_general_geolocation_rules.txt"
-    shell:
-        r"""
-        exec &> >(tee {log:q})
-
-        curl {params.geolocation_rules_url:q} \
-          > {output.general_geolocation_rules:q}
-        """
-
-
-rule concat_geolocation_rules:
-    input:
-        general_geolocation_rules="data/general-geolocation-rules.tsv",
-        local_geolocation_rules=config["curate"]["local_geolocation_rules"],
-    output:
-        all_geolocation_rules="data/all-geolocation-rules.tsv",
-    log:
-        "logs/concat_geolocation_rules.txt",
-    benchmark:
-        "benchmarks/concat_geolocation_rules.txt"
-    shell:
-        r"""
-        exec &> >(tee {log:q})
-
-        cat {input.general_geolocation_rules:q} {input.local_geolocation_rules:q} \
-          > {output.all_geolocation_rules:q}
-        """
-
-
 def format_field_map(field_map: dict[str, str]) -> list[str]:
     """
     Format entries to the format expected by `augur curate --field-map`.
@@ -63,7 +26,7 @@ def format_field_map(field_map: dict[str, str]) -> list[str]:
 rule curate:
     input:
         sequences_ndjson="data/ncbi.ndjson",
-        all_geolocation_rules="data/all-geolocation-rules.tsv",
+        local_geolocation_rules=config["curate"]["local_geolocation_rules"],
         annotations=config["curate"]["annotations"],
     output:
         metadata=temp("data/all_metadata_intermediate.tsv"),
@@ -113,7 +76,7 @@ rule curate:
               --default-value {params.authors_default_value:q} \
               --abbr-authors-field {params.abbr_authors_field:q} \
           | augur curate apply-geolocation-rules \
-              --geolocation-rules {input.all_geolocation_rules:q} \
+              --geolocation-rules {input.local_geolocation_rules:q} \
           | augur curate apply-record-annotations \
               --annotations {input.annotations:q} \
               --id-field {params.annotations_id:q} \
