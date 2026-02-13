@@ -1,10 +1,10 @@
 rule copy_example_data:
     input:
-        sequences="example-data/sequences.fasta.zst",
-        metadata="example-data/metadata.tsv.zst",
+        sequences="example_data/sequences.fasta",
+        metadata="example_data/metadata.tsv",
     output:
-        sequences=temp("data/sequences.fasta.zst"),
-        metadata=temp("data/metadata.tsv.zst"),
+        sequences=temp("data/sequences.fasta"),
+        metadata=temp("data/metadata.tsv"),
     shell:
         """
         cp -f {input.sequences} {output.sequences}
@@ -13,4 +13,4 @@ rule copy_example_data:
 
 
 # force this rule over downloading from nextstrain
-ruleorder: copy_example_data > download
+ruleorder: copy_example_data > decompress
