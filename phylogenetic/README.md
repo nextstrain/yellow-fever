@@ -21,6 +21,16 @@ please do any desired data formatting and curations as part of the
 parameters used for the phylogenetic workflow. Use Snakemake's
 `--configfile`/`--config` options to override these default values.
 
+## Update example data
+
+[Example data][] is used by [CI][] and should be updated occasionally. To
+update, run:
+
+```bash
+nextstrain build . update_example_data -F \
+    --configfiles defaults/config.yaml build-configs/chores/config.yaml
+```
+
 ## Snakefile and rules
 
 The rules directory contains separate Snakefiles (`*.smk`) as modules
@@ -29,7 +39,9 @@ separate files to keep the main ingest [Snakefile][] succinct and
 organized. Modules are all [included][] in the main Snakefile in the
 order that they are expected to run.
 
+[CI]: https://github.com/nextstrain/yellow-fever/actions/workflows/ci.yaml
 [defaults/config.yaml]: ./config/defaults.yaml
+[Example data]: ./example_data/
 [included]: https://snakemake.readthedocs.io/en/stable/snakefiles/modularization.html#includes
 [ingest]: ../ingest/
 [Nextstrain datasets]: https://docs.nextstrain.org/en/latest/reference/glossary.html#term-dataset
